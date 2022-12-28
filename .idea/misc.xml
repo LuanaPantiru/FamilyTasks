@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable-v24/button_activ.xml" value="0.1935" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable-v24/button_not_active.xml" value="0.1935" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable/button_style.xml" value="0.1" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/code_verification.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/create_account.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/log_in.xml" value="0.33" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/log_in.xml" value="0.22426470588235295" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/main_activity.xml" value="0.2815384615384615" />
-        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/reset_password.xml" value="0.2815384615384615" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/new_password.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/reset_password.xml" value="0.2747747747747748" />
       </map>
     </option>
   </component>

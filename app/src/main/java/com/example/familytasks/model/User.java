@@ -14,18 +14,18 @@ public class User {
     private String lastName;
     @ColumnInfo(name = "username")
     private String userName;
-    @ColumnInfo(name = "phone_number")
-    private String phoneNumber;
+    @ColumnInfo(name = "email")
+    private String email;
     @ColumnInfo(name = "password")
     private String password;
     @ColumnInfo(name = "active")
     private Boolean active;
 
-    public User(String firstName, String lastName, String userName, String phoneNumber, String password) {
+    public User(String firstName, String lastName, String userName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.password = password;
     }
 
@@ -61,12 +61,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

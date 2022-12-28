@@ -5,17 +5,17 @@ import android.os.AsyncTask;
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.model.User;
 
-public class GetUserByPhoneNumber extends AsyncTask<String, Void, User> {
+public class GetUserByEmail extends AsyncTask<String, Void, User> {
     AppDatabase appDatabase;
 
-    public GetUserByPhoneNumber(AppDatabase appDatabase){
+    public GetUserByEmail(AppDatabase appDatabase){
         this.appDatabase = appDatabase;
     }
 
     @Override
     protected User doInBackground(String... values) {
-        String phoneNumber = values[0];
-        return appDatabase.userDao().findByPhoneNumber(phoneNumber);
+        String email = values[0];
+        return appDatabase.userDao().findByEmail(email);
     }
 
     @Override

@@ -6,27 +6,24 @@ import com.example.familytasks.AppDatabase;
 import com.example.familytasks.dao.UserDao;
 import com.example.familytasks.model.User;
 
-public class UserInsert extends AsyncTask<User, Void, String> {
+import java.nio.channels.AsynchronousChannelGroup;
 
+public class UserUpdate extends AsyncTask<User,Void,String> {
     private final AppDatabase appDatabase;
 
-    public UserInsert(AppDatabase appDatabase) {
+    public UserUpdate(AppDatabase appDatabase) {
         this.appDatabase = appDatabase;
     }
 
     @Override
     protected String doInBackground(User... users) {
         UserDao userDao = appDatabase.userDao();
-        User user = users[0];
-        if (userDao.findByUsername(user.getUserName()) != null) {
-            return "Username already exists.";
+        try{
+            userDao.updateUsers(users);
+            return "Account update with success";
+        }catch (Exception e){
+            return "Account can't be updated: " + e.getMessage();
         }
-        if (userDao.findByEmail(user.getEmail()) != null) {
-            return "Already exists an account associated with this email address.";
-        }
-        user.setActive(true);
-        userDao.insert(user);
-        return "Account created.";
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.familytasks.dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.familytasks.model.User;
 
@@ -16,6 +17,8 @@ public interface UserDao {
     List<User> getAll();
     @Query("select * from user where username = :username")
     User findByUsername(String username);
-    @Query("select * from user where phone_number = :phoneNumber")
-    User findByPhoneNumber(String phoneNumber);
+    @Query("select * from user where email = :email")
+    User findByEmail(String email);
+    @Update
+    void updateUsers(User...users);
 }

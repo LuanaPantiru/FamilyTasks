@@ -8,20 +8,20 @@
 
 
     <EditText
-        android:id="@+id/phoneNumber"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
         android:ems="15"
-        android:inputType="phone"
-        android:hint="@string/phone_number"/>
+        android:inputType="textEmailAddress"
+        android:hint="@string/email_address"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumber"
+        android:layout_below="@+id/email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:ems="15"
@@ -33,25 +33,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginTop="20dp"
         android:text="@string/remember_me" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logIn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rememberMe"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/log_in"
+        android:background="@drawable/button_active"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/redirectCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rememberMe"
+        android:layout_below="@+id/logIn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:text="@string/redirect_create_account" />
 
-    <Button
-        android:id="@+id/logIn"
+    <TextView
+        android:id="@+id/redirectForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/redirectCreateAccount"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="@string/log_in" />
+        android:layout_marginTop="20dp"
+        android:text="@string/forgot_password" />
 </RelativeLayout>
