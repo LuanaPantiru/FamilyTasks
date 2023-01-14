@@ -1,23 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Welcome" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/button_active"
+        android:text="Account"
+        android:textColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groups"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_below="@+id/account"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/groups"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
         android:text="@string/log_out"
         android:background="@drawable/button_active"
         android:textColor="@color/white"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createGroup"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/groups"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_active"
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 </RelativeLayout>
