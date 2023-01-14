@@ -6,7 +6,7 @@ import com.example.familytasks.AppDatabase;
 import com.example.familytasks.dao.UserDao;
 import com.example.familytasks.model.User;
 
-public class UserInsert extends AsyncTask<User, Void, String> {
+public class UserInsert extends AsyncTask<User, Void, Long> {
 
     private final AppDatabase appDatabase;
 
@@ -15,22 +15,19 @@ public class UserInsert extends AsyncTask<User, Void, String> {
     }
 
     @Override
-    protected String doInBackground(User... users) {
+    protected Long doInBackground(User... user) {
         UserDao userDao = appDatabase.userDao();
-        User user = users[0];
-        if (userDao.findByUsername(user.getUserName()) != null) {
-            return "Username already exists.";
-        }
-        if (userDao.findByEmail(user.getEmail()) != null) {
-            return "Already exists an account associated with this email address.";
-        }
-        user.setActive(true);
-        userDao.insert(user);
-        return "Account created.";
+//        if (userDao.findByUsername(user.getUserName()) != null) {
+//            return "Username already exists.";
+//        }
+//        if (userDao.findByEmail(user.getEmail()) != null) {
+//            return "Already exists an account associated with this email address.";
+//        }
+        return userDao.insert(user[0]);
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Long result) {
         super.onPostExecute(result);
     }
 }

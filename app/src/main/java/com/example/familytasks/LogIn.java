@@ -26,6 +26,8 @@ public class LogIn extends AppCompatActivity{
     private Boolean rememberMe;
     private Button logIn;
     private int numberOfLogIn = 0;
+
+    private User user;
     private final UserRepository userRepository = new UserRepository();
     private final InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -53,7 +55,7 @@ public class LogIn extends AppCompatActivity{
                 if(validateAccount()){
                     Toast.makeText(LogIn.this, "Log in with success", Toast.LENGTH_SHORT).show();
                     Intent registerScreen = new Intent(LogIn.this, MainActivity.class);
-                    registerScreen.putExtra("email", email);
+                    registerScreen.putExtra("id", user.getId());
                     interactionsBetweenScreens.changeScreen(LogIn.this,registerScreen);
                 }
             }else{
@@ -68,12 +70,10 @@ public class LogIn extends AppCompatActivity{
         SharedPreferences sharedPreferences = getSharedPreferences("PREFS", MODE_PRIVATE);
         String key = sharedPreferences.getAll().keySet().stream().filter(sp -> sp.contains("rememberMe")).findAny().orElse(null);
         if(key!=null){
-            String value = sharedPreferences.getString(key,null);
-            if(value!=null){
-               Intent registerScreen = new Intent(LogIn.this, MainActivity.class);
-               registerScreen.putExtra("email",value);
-               interactionsBetweenScreens.changeScreen(LogIn.this,registerScreen);
-            }
+            Long value = Long.parseLong(sharedPreferences.getString(key,null));
+            Intent registerScreen = new Intent(LogIn.this, MainActivity.class);
+            registerScreen.putExtra("id",value);
+            interactionsBetweenScreens.changeScreen(LogIn.this,registerScreen);
         }
     }
 
@@ -82,7 +82,7 @@ public class LogIn extends AppCompatActivity{
         password = ((EditText) findViewById(R.id.password)).getText().toString();
         if(!email.isEmpty() && !password.isEmpty()){
             if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
-                User user = userRepository.findUserByEmail(email);
+                user = userRepository.findUserByEmail(email);
                 if (user != null) {
                     if(!user.getActive()){
                         Toast.makeText(LogIn.this, "Account is not active. Reset password!", Toast.LENGTH_SHORT).show();
@@ -115,7 +115,7 @@ public class LogIn extends AppCompatActivity{
         if(rememberMe){
             SharedPreferences preferences = getSharedPreferences("PREFS", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(user.getUserName()+"rememberMe",user.getEmail());
+            editor.putString(user.getEmail()+"rememberMe",String.valueOf(user.getId()));
             editor.apply();
         }
     }

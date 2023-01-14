@@ -48,7 +48,7 @@ public class CreateAccount extends AppCompatActivity {
                 String result = userRepository.insertUser(firstName,lastName,username,email,password);
                 if(result!=null){
                     Toast.makeText(CreateAccount.this, result, Toast.LENGTH_SHORT).show();
-                    if(result.equalsIgnoreCase("account created.")){
+                    if(result.equalsIgnoreCase("account created!")){
                         redirectToLogIn();
                     }
                 }

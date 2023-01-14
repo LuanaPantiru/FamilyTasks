@@ -12,13 +12,15 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert
-    void insert(User... user);
+    long insert(User user);
     @Query("select * from user")
     List<User> getAll();
     @Query("select * from user where username = :username")
     User findByUsername(String username);
     @Query("select * from user where email = :email")
     User findByEmail(String email);
+    @Query("select * from user where id = :id")
+    User findById(long id);
     @Update
     void updateUsers(User...users);
 }

@@ -3,6 +3,8 @@ package com.example.familytasks.repository;
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.ApplicationController;
 import com.example.familytasks.async.GetUserByEmail;
+import com.example.familytasks.async.GetUserById;
+import com.example.familytasks.async.GetUserByUsername;
 import com.example.familytasks.async.GetUsers;
 import com.example.familytasks.async.UserInsert;
 import com.example.familytasks.async.UserUpdate;
@@ -19,8 +21,17 @@ public class UserRepository {
 
     public String insertUser(String firstName, String lastName, String username, String email, String password){
         User user = new User(firstName,lastName,username,email,password);
+
+        if (findUserByUsername(user.getUserName()) != null) {
+            return "Username already exists.";
+        }
+        if (findUserByEmail(user.getEmail()) != null) {
+            return "Already exists an account associated with this email address.";
+        }
         try {
-            return new UserInsert(appDatabase).execute(user).get();
+            user.setActive(true);
+            new UserInsert(appDatabase).execute(user).get();
+            return "Account created!";
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -34,6 +45,15 @@ public class UserRepository {
     public User findUserByEmail(String email){
         try {
             return new GetUserByEmail(appDatabase).execute(email).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public User findUserByUsername(String username){
+        try {
+            return new GetUserByUsername(appDatabase).execute(username).get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -70,4 +90,22 @@ public class UserRepository {
             return "Doesn't exists an account associated with this email address.";
         }
     }
+
+    public User findUserById(long id) {
+        try {
+            return new GetUserById(appDatabase).execute(id).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+//    public List<UserWithNormalMember> getUserWithMember(){
+//        try {
+//            return new GetUserWithMember(appDatabase).execute().get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }
