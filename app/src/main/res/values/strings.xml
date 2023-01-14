@@ -19,4 +19,8 @@
     <string name="enter_a_new_password">Enter a new password.</string>
     <string name="confirm_password">Confirm password</string>
     <string name="email_address">Email Address</string>
+    <string name="family_group_name">Family Group Name</string>
+    <string name="create_family_group">Create Family Group</string>
+    <string name="set_your_nickname">Set your nickname</string>
+    <string name="activity">Activity</string>
 </resources>

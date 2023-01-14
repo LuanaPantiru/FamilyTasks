@@ -45,6 +45,14 @@
             android:name=".NewPassword"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".CreateGroup"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".FamilyGroupDetails"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
