@@ -58,7 +58,7 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".AddTask"
+            android:name=".CreateTask"
             android:exported="true">
         </activity>
     </application>

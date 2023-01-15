@@ -47,7 +47,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         createTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FamilyGroupDetails.this, AddTask.class);
+                Intent intent = new Intent(FamilyGroupDetails.this, CreateTask.class);
                 startActivity(intent);
             }
         });

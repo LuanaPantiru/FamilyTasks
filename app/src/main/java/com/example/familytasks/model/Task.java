@@ -2,81 +2,75 @@ package com.example.familytasks.model;
 
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Task {
 
     @PrimaryKey(autoGenerate = true)
-    private long Id;
-    private String Title;
-    private String Description;
-    private int Priority;
+    private long id;
+    private String title;
+    private String description;
+    private int priority;
 
-    private String Status;
-    private User Asignee;
-    private String mDate;
+    private String status;
+    @Ignore
+    private User assignee;
 
 
-    public Task(String title, String description, String date, int priority, String status, User asignee) {
-        Title = title;
-        Description = description;
-        Priority = priority;
-        Status = status;
-        mDate = date;
-        Asignee = asignee;
+    public Task(String title, String description, int priority, String status) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.status = status;
+        //Assignee = assignee;
     }
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
     public String getTitle() {
-        return Title;
+        return this.title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
-    public String getDate() {
-        return mDate;
-    }
 
-    public void setDate(String date) {
-        mDate = date;
-    }
     public int getPriority() {
-        return Priority;
+        return priority;
     }
 
     public void setPriority(int priority) {
-        Priority = priority;
+        this.priority = priority;
     }
 
     public String getStatus() {
-        return Status;
+        return this.status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
-    public User getAsignee() {
-        return Asignee;
+    public User getAssignee() {
+        return this.assignee;
     }
 
-    public void setAsignee(User asignee) {
-        Asignee = asignee;
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
     }
 
 }

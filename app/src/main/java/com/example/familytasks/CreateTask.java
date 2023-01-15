@@ -1,6 +1,7 @@
 package com.example.familytasks;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,11 +11,19 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddTask extends AppCompatActivity {
+import com.example.familytasks.model.Task;
+import com.example.familytasks.repository.GroupRepository;
+import com.example.familytasks.repository.TaskRepository;
+import com.example.familytasks.util.InteractionsBetweenScreens;
+import com.example.familytasks.util.impl.InteractionBetweenScreensImpl;
+
+public class CreateTask extends AppCompatActivity {
 
     private EditText taskNameEditText;
     private EditText taskDescriptionEditText;
     private Button createTaskButton;
+    private TaskRepository taskRepository = new TaskRepository();
+    private InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +49,11 @@ public class AddTask extends AppCompatActivity {
             public void onClick(View v) {
                 String taskName = taskNameEditText.getText().toString();
                 String taskDescription = taskDescriptionEditText.getText().toString();
-                // Add code here to save the task to a database or other storage
+                Task task = new Task("title","description",2,"done");
+                if(taskRepository.createTask(task)!=null){
+                    Intent familyDetailsScreen = new Intent(CreateTask.this, FamilyGroupDetails.class);
+                    interactionsBetweenScreens.changeScreen(CreateTask.this,familyDetailsScreen);
+                }
             }
 
     });
