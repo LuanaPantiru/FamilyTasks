@@ -24,7 +24,7 @@ public class Task {
         this.description = description;
         this.priority = priority;
         this.status = status;
-        //Assignee = assignee;
+        //this.assignee = assignee;
     }
     public long getId() {
         return id;

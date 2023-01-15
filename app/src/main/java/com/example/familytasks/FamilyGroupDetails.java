@@ -72,5 +72,9 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
             Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
             startActivity(intent);
         }
+        if(activity.equals(Activities.All_finish_task.getActivityName())){
+            Intent intent = new Intent(FamilyGroupDetails.this, TaskDetails.class);
+            startActivity(intent);
+        }
     }
 }

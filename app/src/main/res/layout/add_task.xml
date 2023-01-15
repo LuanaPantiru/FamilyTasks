@@ -6,12 +6,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txtViewAddTask"
+        android:id="@+id/txtTasktitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AddTask Title"
+        android:layout_marginTop="10dp"
+        android:text="Add a new task"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/task_title_edit_text"
@@ -19,7 +23,7 @@
         android:layout_height="60dp"
         android:hint="Task Title"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewAddTask"
+        app:layout_constraintTop_toBottomOf="@+id/txtTasktitle"
         tools:layout_editor_absoluteX="33dp" />
 
     <EditText

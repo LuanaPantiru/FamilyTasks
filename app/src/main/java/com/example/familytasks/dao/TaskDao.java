@@ -14,8 +14,8 @@ import java.util.List;
 public interface TaskDao {
     @Insert
     long insert(Task task);
-//    @Query("select * from familygroup join adminmember on adminMemberId=memberId where userId = :userId")
-//    List<FamilyGroup> getFamilyGroupsByUserId(long userId);
+    @Query("select * from task")
+    List<Task> getAllTasks();
 //    @Query("select * from familygroup where id = :familyId")
 //    FamilyGroup getFamilyGroupsByFamilyId(long familyId);
 }

@@ -21,7 +21,9 @@ public class CreateTask extends AppCompatActivity {
 
     private EditText taskNameEditText;
     private EditText taskDescriptionEditText;
-    private Button createTaskButton;
+    private EditText taskPriorityEditText;
+    private Spinner taskStatusSpinner;
+    private Button saveTaskButton;
     private TaskRepository taskRepository = new TaskRepository();
     private InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
     @Override
@@ -31,25 +33,31 @@ public class CreateTask extends AppCompatActivity {
 
         taskNameEditText = (EditText) findViewById(R.id.task_title_edit_text);
         taskDescriptionEditText = (EditText) findViewById(R.id.task_description_edit_text);
-        createTaskButton = (Button) findViewById(R.id.save_task_button);
+        saveTaskButton = (Button) findViewById(R.id.save_task_button);
+        taskPriorityEditText = (EditText) findViewById(R.id.priority_editText);
+        taskStatusSpinner = (Spinner) findViewById(R.id.status_spinner);
 
-        String[] spinnerEntries = {"Option 1", "Option 2", "Option 3"};
+        String[] spinnerAssignees = {"Assignee 1", "Assignee 2", "Assignee 3"};
+        String[] spinnerStatus = {"To do", "In progress","Finised"};
         Spinner statusSpinner = (Spinner) findViewById(R.id.status_spinner);
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerEntries);
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerStatus);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         statusSpinner.setAdapter(statusAdapter);
 
-        Spinner asigneeSpinner = (Spinner) findViewById(R.id.taskAsignee_spinner);
-        ArrayAdapter<String> asigneeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerEntries);
-        asigneeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        asigneeSpinner.setAdapter(asigneeAdapter);
+        Spinner assigneeSpinner = (Spinner) findViewById(R.id.taskAsignee_spinner);
+        ArrayAdapter<String> assigneeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerAssignees);
+        assigneeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        assigneeSpinner.setAdapter(assigneeAdapter);
 
-        createTaskButton.setOnClickListener(new View.OnClickListener() {
+        saveTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String taskName = taskNameEditText.getText().toString();
                 String taskDescription = taskDescriptionEditText.getText().toString();
-                Task task = new Task("title","description",2,"done");
+                Integer taskPriority = Integer.parseInt(taskPriorityEditText.getText().toString());
+                String taskStatus = taskStatusSpinner.getSelectedItem().toString();
+
+                Task task = new Task(taskName,taskDescription,taskPriority,taskStatus);
                 if(taskRepository.createTask(task)!=null){
                     Intent familyDetailsScreen = new Intent(CreateTask.this, FamilyGroupDetails.class);
                     interactionsBetweenScreens.changeScreen(CreateTask.this,familyDetailsScreen);
