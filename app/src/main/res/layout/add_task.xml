@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtViewAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AddTask Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/task_title_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Task Title"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewAddTask"
+        tools:layout_editor_absoluteX="33dp" />
+
+    <EditText
+        android:id="@+id/task_description_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Task description"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/priority_editText"
+        tools:layout_editor_absoluteX="29dp" />
+
+    <Button
+        android:id="@+id/save_task_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/priority_editText"
+        android:layout_width="173dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Task priority"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_title_edit_text" />
+
+    <Spinner
+        android:id="@+id/status_spinner"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_description_edit_text" />
+
+    <Spinner
+        android:id="@+id/taskAsignee_spinner"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_spinner" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,11 @@
 package com.example.familytasks;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
     private long familyId;
     private FamilyGroup familyGroup;
 
+
     private GroupRepository groupRepository = new GroupRepository();
 
     @SuppressLint("SetTextI18n")
@@ -38,6 +42,15 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         TextView familyName = findViewById(R.id.familyGroupName);
         familyName.setText(familyGroup.getFamilyGroupName()+" Family");
         createListOfActivities();
+
+        Button createTaskButton = (Button) findViewById(R.id.createTask);
+        createTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FamilyGroupDetails.this, AddTask.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -54,9 +67,10 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         String activity = (String) obj;
         if(activity.equals(Activities.All_members.getActivityName())){
             Toast.makeText(this,String.valueOf(familyId),Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this,"NU",Toast.LENGTH_SHORT).show();
         }
-
+        if(activity.equals(Activities.My_tasks.getActivityName())){
+            Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
+            startActivity(intent);
+        }
     }
 }
