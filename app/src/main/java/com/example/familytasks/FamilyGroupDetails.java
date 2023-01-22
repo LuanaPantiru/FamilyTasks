@@ -1,6 +1,7 @@
 package com.example.familytasks;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.familytasks.model.FamilyGroup;
 import com.example.familytasks.model.enums.Activities;
 import com.example.familytasks.repository.GroupRepository;
+import com.example.familytasks.util.InteractionsBetweenScreens;
+import com.example.familytasks.util.impl.InteractionBetweenScreensImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +28,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
     private FamilyGroup familyGroup;
 
     private GroupRepository groupRepository = new GroupRepository();
+    private InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -53,7 +57,9 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
     public void onItemClick(Object obj) {
         String activity = (String) obj;
         if(activity.equals(Activities.All_members.getActivityName())){
-            Toast.makeText(this,String.valueOf(familyId),Toast.LENGTH_SHORT).show();
+            Intent registerScreen = new Intent(FamilyGroupDetails.this, AllMembers.class);
+            registerScreen.putExtra("familyId",familyId);
+            interactionsBetweenScreens.changeScreen(FamilyGroupDetails.this,registerScreen);
         }else{
             Toast.makeText(this,"NU",Toast.LENGTH_SHORT).show();
         }

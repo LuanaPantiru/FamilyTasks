@@ -40,7 +40,7 @@ public class CreateGroup extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
-        Spinner spinnerNickname = (Spinner) findViewById(R.id.nickname);
+        Spinner spinnerNickname = findViewById(R.id.nickname);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateGroup.this,
                 android.R.layout.simple_spinner_item, familyMemberNicknames);
 

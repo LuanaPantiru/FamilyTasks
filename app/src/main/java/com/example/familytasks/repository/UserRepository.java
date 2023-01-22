@@ -5,11 +5,14 @@ import com.example.familytasks.ApplicationController;
 import com.example.familytasks.async.GetUserByEmail;
 import com.example.familytasks.async.GetUserById;
 import com.example.familytasks.async.GetUserByUsername;
+import com.example.familytasks.async.GetUserByUsernameOrEmail;
 import com.example.familytasks.async.GetUsers;
 import com.example.familytasks.async.UserInsert;
 import com.example.familytasks.async.UserUpdate;
 import com.example.familytasks.model.User;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class UserRepository {
@@ -38,8 +41,13 @@ public class UserRepository {
         }
     }
 
-    public void getUsers(){
-        new GetUsers(appDatabase).execute();
+    public List<User> getUsers(){
+        try {
+            return new GetUsers(appDatabase).execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return Collections.EMPTY_LIST;
+        }
     }
 
     public User findUserByEmail(String email){
@@ -100,12 +108,13 @@ public class UserRepository {
         }
     }
 
-//    public List<UserWithNormalMember> getUserWithMember(){
-//        try {
-//            return new GetUserWithMember(appDatabase).execute().get();
-//        } catch (ExecutionException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public List<User> searchUserByUsernameOrEmail(String value){
+        try {
+            return new GetUserByUsernameOrEmail(appDatabase).execute(value).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

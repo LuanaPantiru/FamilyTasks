@@ -1,11 +1,16 @@
 package com.example.familytasks.model;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class User {
+public class User implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "first_name")
@@ -27,6 +32,17 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public User(Parcel parcel) {
+        id = parcel.readLong();
+        firstName = parcel.readString();
+        lastName = parcel.readString();
+        userName = parcel.readString();
+        email = parcel.readString();
+        password = parcel.readString();
+        active = parcel.readBoolean();
     }
 
     public long getId() {
@@ -57,8 +73,8 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
     public String getEmail() {
@@ -84,4 +100,34 @@ public class User {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(userName);
+        parcel.writeString(email);
+        parcel.writeString(password);
+        parcel.writeBoolean(active);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>()
+    {
+        @RequiresApi(api = Build.VERSION_CODES.Q)
+        public User createFromParcel(Parcel in)
+        {
+            return new User(in);
+        }
+        public User[] newArray(int size)
+        {
+            return new User[size];
+        }
+    };
 }

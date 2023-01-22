@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/account"
+    <EditText
+        android:id="@+id/searchUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/button_active"
-        android:text="Account"
-        android:textColor="@color/white" />
+        android:ems="18"
+        android:inputType="textPersonName"
+        android:hint="@string/search_user" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/groups"
+        android:id="@+id/users"
         android:layout_width="match_parent"
         android:layout_height="550dp"
-        android:layout_below="@+id/account"
+        android:layout_below="@id/searchUser"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/logOut"
+        android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/groups"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:text="@string/log_out"
-        android:background="@drawable/button_active"
-        android:textColor="@color/white"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/createGroup"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/groups"
+        android:layout_below="@+id/users"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/button_active"
-        android:text="+"
+        android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="20sp" />
 </RelativeLayout>

@@ -23,4 +23,12 @@
     <string name="create_family_group">Create Family Group</string>
     <string name="set_your_nickname">Set your nickname</string>
     <string name="activity">Activity</string>
+    <string name="member_name">Member Name</string>
+    <string name="member_nickname">Member Nickname</string>
+    <string name="members">Members</string>
+    <string name="search_user">Search User by username or email address</string>
+    <string name="next">Next</string>
+    <string name="name">Name</string>
+    <string name="set_nickname_for_the_future_members">Set nickname for the future members</string>
+    <string name="save">Save</string>
 </resources>

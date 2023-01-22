@@ -6,8 +6,19 @@ import androidx.room.PrimaryKey;
 @Entity
 public class NormalMember extends Member{
 
-    public NormalMember(int userId, String userNickname) {
+    private long familyGroupId;
+
+    public NormalMember(long userId, String userNickname, long familyGroupId) {
         super(userId, userNickname);
+        this.familyGroupId = familyGroupId;
+    }
+
+    public long getFamilyGroupId() {
+        return familyGroupId;
+    }
+
+    public void setFamilyGroupId(long familyGroupId) {
+        this.familyGroupId = familyGroupId;
     }
 
     @Override

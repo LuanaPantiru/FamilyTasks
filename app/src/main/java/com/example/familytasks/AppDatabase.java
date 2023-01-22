@@ -12,7 +12,7 @@ import com.example.familytasks.model.FamilyGroup;
 import com.example.familytasks.model.NormalMember;
 import com.example.familytasks.model.User;
 
-@Database(entities = {User.class,NormalMember.class, AdminMember.class, FamilyGroup.class}, version = 6)
+@Database(entities = {User.class,NormalMember.class, AdminMember.class, FamilyGroup.class}, version = 7)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract NormalMemberDao normalMemberDao();

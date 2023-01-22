@@ -18,7 +18,8 @@ public class FamilyGroup {
     @Ignore
     private AdminMember adminMember;
     @Ignore
-    private List<NormalMember> normalMembers;
+    private List<NormalMember> members;
+
 
     public FamilyGroup(String familyGroupName,long adminMemberId) {
         this.familyGroupName = familyGroupName;
@@ -41,6 +42,15 @@ public class FamilyGroup {
         this.id = id;
     }
 
+
+    public long getAdminMemberId() {
+        return adminMemberId;
+    }
+
+    public void setAdminMemberId(long adminMemberId) {
+        this.adminMemberId = adminMemberId;
+    }
+
     public AdminMember getAdminMember() {
         return adminMember;
     }
@@ -49,19 +59,11 @@ public class FamilyGroup {
         this.adminMember = adminMember;
     }
 
-    public List<NormalMember> getNormalMembers() {
-        return normalMembers;
+    public List<NormalMember> getMembers() {
+        return members;
     }
 
-    public void setNormalMembers(List<NormalMember> normalMembers) {
-        this.normalMembers = normalMembers;
-    }
-
-    public long getAdminMemberId() {
-        return adminMemberId;
-    }
-
-    public void setAdminMemberId(long adminMemberId) {
-        this.adminMemberId = adminMemberId;
+    public void setMembers(List<NormalMember> members) {
+        this.members = members;
     }
 }

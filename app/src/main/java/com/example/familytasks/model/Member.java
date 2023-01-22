@@ -1,6 +1,7 @@
 package com.example.familytasks.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -8,6 +9,8 @@ public abstract class Member {
     @PrimaryKey(autoGenerate = true)
     private long memberId;
     private long userId;
+    @Ignore
+    private User user;
     private String userNickname;
 
     public Member(long userId, String userNickname) {
@@ -39,5 +42,13 @@ public abstract class Member {
 
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -21,6 +21,8 @@ public interface UserDao {
     User findByEmail(String email);
     @Query("select * from user where id = :id")
     User findById(long id);
+    @Query("select * from user where username like :value or email like :value")
+    List<User> getUserByUsernameOrEmail(String value);
     @Update
     void updateUsers(User...users);
 }
