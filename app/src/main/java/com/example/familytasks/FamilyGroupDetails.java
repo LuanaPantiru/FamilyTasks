@@ -68,13 +68,15 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         if(activity.equals(Activities.All_members.getActivityName())){
             Toast.makeText(this,String.valueOf(familyId),Toast.LENGTH_SHORT).show();
         }
-        if(activity.equals(Activities.My_tasks.getActivityName())){
-            Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
-            startActivity(intent);
-        }
-        if(activity.equals(Activities.All_finish_task.getActivityName())){
-            Intent intent = new Intent(FamilyGroupDetails.this, TaskDetails.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
+        if(activity.equals(Activities.My_tasks.getActivityName()))
+            intent.putExtra("taskStatus", "");
+        if(activity.equals(Activities.All_finish_task.getActivityName()))
+            intent.putExtra("taskStatus", "Finished");
+        if(activity.equals(Activities.All_to_do_tasks.getActivityName()))
+            intent.putExtra("taskStatus", "To do");
+        if(activity.equals(Activities.All_in_progress_task.getActivityName()))
+            intent.putExtra("taskStatus", "In progress");
+        startActivity(intent);
     }
 }

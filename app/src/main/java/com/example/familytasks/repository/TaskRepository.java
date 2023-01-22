@@ -6,6 +6,7 @@ import com.example.familytasks.async.FamilyGroupInsert;
 import com.example.familytasks.async.GetAdminById;
 import com.example.familytasks.async.GetFamilyGroupByFamilyId;
 import com.example.familytasks.async.GetTasks;
+import com.example.familytasks.async.GetTasksByStatus;
 import com.example.familytasks.async.TaskInsert;
 import com.example.familytasks.model.AdminMember;
 import com.example.familytasks.model.FamilyGroup;
@@ -39,5 +40,12 @@ public class TaskRepository {
         }
         return null;
     }
-
+    public List<Task> getTasksByStatus(String status){
+        try {
+            return new GetTasksByStatus(appDatabase).execute(status).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

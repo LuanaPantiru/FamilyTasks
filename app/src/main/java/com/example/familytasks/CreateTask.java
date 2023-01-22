@@ -38,7 +38,7 @@ public class CreateTask extends AppCompatActivity {
         taskStatusSpinner = (Spinner) findViewById(R.id.status_spinner);
 
         String[] spinnerAssignees = {"Assignee 1", "Assignee 2", "Assignee 3"};
-        String[] spinnerStatus = {"To do", "In progress","Finised"};
+        String[] spinnerStatus = {"To do", "In progress","Finished"};
         Spinner statusSpinner = (Spinner) findViewById(R.id.status_spinner);
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerStatus);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
