@@ -53,21 +53,6 @@
             android:name=".FamilyGroupDetails"
             android:exported="true">
         </activity>
-        <activity
-            android:name=".AllMembers"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".AddMember"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".SetNickname"
-            android:exported="true">
-
-        </activity>
     </application>
 
 </manifest>
