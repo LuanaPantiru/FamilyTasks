@@ -23,11 +23,15 @@ public class MyTasks extends AppCompatActivity {
 
    // private TaskAdapter adapter;
     private TaskRepository taskRepository = new TaskRepository();
+    private long familyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_tasks);
+
+        Bundle extra = getIntent().getExtras();
+        familyId = extra.getLong("familyId");
 
         ListView tasksListView = (ListView) findViewById(R.id.my_tasks_list_view);
 
@@ -35,9 +39,9 @@ public class MyTasks extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             String taskStatus = getIntent().getExtras().getString("taskStatus");
             if (taskStatus.equals(""))
-                objectList = new ArrayList<String>(taskRepository.getAllTasks().stream().map(Task::getTitle).collect(Collectors.toList()));
+                objectList = new ArrayList<String>(taskRepository.getAllTasks(familyId).stream().map(Task::getTitle).collect(Collectors.toList()));
             else
-                objectList = new ArrayList<String>(taskRepository.getTasksByStatus(taskStatus).stream().map(Task::getTitle).collect(Collectors.toList()));
+                objectList = new ArrayList<String>(taskRepository.getTasksByStatus(taskStatus, familyId).stream().map(Task::getTitle).collect(Collectors.toList()));
 
         }
         ArrayAdapter<String> itemsAdapter =
@@ -47,7 +51,7 @@ public class MyTasks extends AppCompatActivity {
         tasksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Task task = taskRepository.getAllTasks().get(position);
+                Task task = taskRepository.getAllTasks(familyId).get(position);
                 Intent intent = new Intent(MyTasks.this, TaskDetails.class);
                 intent.putExtra("task", task);
                 startActivity(intent);

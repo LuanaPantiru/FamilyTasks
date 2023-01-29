@@ -1,13 +1,25 @@
 package com.example.familytasks.model;
 
 
+import static androidx.room.ForeignKey.NO_ACTION;
+
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity
+@Entity(foreignKeys = {@ForeignKey(entity = User.class,
+        parentColumns = "id",
+        childColumns = "idUser",
+        onDelete = ForeignKey.NO_ACTION),
+        @ForeignKey(entity = FamilyGroup.class,
+                parentColumns = "id",
+                childColumns = "idFamilyGroup",
+                onDelete = NO_ACTION)
+}, indices = {@Index("idUser"),@Index(("idFamilyGroup"))})
 public class Task implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
@@ -15,18 +27,20 @@ public class Task implements Serializable {
     private String title;
     private String description;
     private int priority;
-
     private String status;
-    @Ignore
-    private User assignee;
+
+    private long idUser;
+
+    private long idFamilyGroup;
 
 
-    public Task(String title, String description, int priority, String status) {
+    public Task(String title, String description, int priority, String status, long idUser, long idFamilyGroup) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.status = status;
-        //this.assignee = assignee;
+        this.idUser = idUser;
+        this.idFamilyGroup = idFamilyGroup;
     }
     public long getId() {
         return id;
@@ -67,12 +81,19 @@ public class Task implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    public User getAssignee() {
-        return this.assignee;
+    public long getIdUser() {
+        return this.idUser;
     }
 
-    public void setAssignee(User assignee) {
-        this.assignee = assignee;
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
+    }
+    public long getIdFamilyGroup() {
+        return this.idFamilyGroup;
+    }
+
+    public void setIdFamilyGroup(long idFamilyGroup) {
+        this.idFamilyGroup = idFamilyGroup;
     }
 
 }

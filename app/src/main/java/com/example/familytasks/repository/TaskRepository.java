@@ -31,18 +31,18 @@ public class TaskRepository {
         return null;
     }
 
-    public List<Task>getAllTasks(){
+    public List<Task>getAllTasks(Long familyId){
         try {
 
-            return new GetTasks(appDatabase).execute().get();
+            return new GetTasks(appDatabase).execute(familyId).get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
     }
-    public List<Task> getTasksByStatus(String status){
+    public List<Task> getTasksByStatus(String status, Long familyid){
         try {
-            return new GetTasksByStatus(appDatabase).execute(status).get();
+            return new GetTasksByStatus(appDatabase).execute(status, familyid).get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }

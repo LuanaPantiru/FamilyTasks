@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class GetTasks extends AsyncTask<Void, Void, List<Task>> {
+public class GetTasks extends AsyncTask<Long, Void, List<Task>> {
 
     AppDatabase appDatabase;
 
@@ -19,10 +19,10 @@ public class GetTasks extends AsyncTask<Void, Void, List<Task>> {
     }
 
     @Override
-    protected List<Task> doInBackground(Void... voids) {
+    protected List<Task> doInBackground(Long... familyIds) {
         List<Task> tasks;
         try{
-            tasks = appDatabase.taskDao().getAllTasks();
+            tasks = appDatabase.taskDao().getAllTasks(familyIds[0]);
         }catch (Exception e){
             return Collections.emptyList();
         }

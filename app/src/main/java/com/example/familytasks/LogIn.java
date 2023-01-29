@@ -20,6 +20,8 @@ import com.example.familytasks.util.InteractionsBetweenScreens;
 import com.example.familytasks.util.MailApi;
 import com.example.familytasks.util.impl.InteractionBetweenScreensImpl;
 
+import lombok.ToString;
+
 public class LogIn extends AppCompatActivity{
     private String email;
     private String password;
@@ -123,7 +125,8 @@ public class LogIn extends AppCompatActivity{
     private void lockAccount(){
         userRepository.deactivateAccount(email);
         int code = (int)Math.floor(Math.random()*(9999-1000+1)+1000);
-        MailApi mailApi = new MailApi(LogIn.this,email,"Reset Password",code);
+
+        MailApi mailApi = new MailApi(LogIn.this,email,"Reset Password", String.valueOf(code));
         mailApi.execute();
         Intent registerScreen = new Intent(LogIn.this, CheckCode.class);
         registerScreen.putExtra("code",code);

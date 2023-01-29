@@ -4,13 +4,12 @@ import android.os.AsyncTask;
 
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.model.Task;
-import com.example.familytasks.model.User;
 
 import java.util.Collections;
 import java.util.List;
 
 
-public class GetTasksByStatus extends AsyncTask<String, Void, List<Task>> {
+public class GetTasksByStatus extends AsyncTask<Object, Void, List<Task>> {
 
     AppDatabase appDatabase;
 
@@ -19,11 +18,12 @@ public class GetTasksByStatus extends AsyncTask<String, Void, List<Task>> {
     }
 
     @Override
-    protected List<Task> doInBackground(String... values) {
+    protected List<Task> doInBackground(Object... values) {
         List<Task> tasks;
         try{
-            String status = values[0];
-            tasks = appDatabase.taskDao().getTasksByStatus(status);
+            String status = (String)values[0];
+            Long familyId = (Long)values[1];
+            tasks = appDatabase.taskDao().getTasksByStatus(status,familyId);
         }catch (Exception e){
             return Collections.emptyList();
         }

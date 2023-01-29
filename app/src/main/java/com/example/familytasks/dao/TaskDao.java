@@ -13,10 +13,10 @@ import java.util.List;
 public interface TaskDao {
     @Insert
     long insert(Task task);
-    @Query("select * from task")
-    List<Task> getAllTasks();
+    @Query("select * from task where idFamilyGroup=:familyId")
+    List<Task> getAllTasks(long familyId);
     @Query("select * from task where id = :taskId")
     Task getTaskById(long taskId);
-    @Query("select * from task where status = :status")
-    List<Task> getTasksByStatus(String status);
+    @Query(value = "select * from task where status = :status and idFamilyGroup =:familyId")
+    List<Task> getTasksByStatus(String status,Long familyId);
 }
