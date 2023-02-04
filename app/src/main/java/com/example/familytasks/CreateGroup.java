@@ -59,6 +59,7 @@ public class CreateGroup extends AppCompatActivity implements AdapterView.OnItem
                 FamilyGroup familyGroup = new FamilyGroup(groupName, adminMember.getMemberId());
                 if(groupRepository.createGroup(familyGroup)!=null){
                     Intent registerScreen = new Intent(CreateGroup.this, MainActivity.class);
+                    registerScreen.putExtra("id",userId);
                     interactionsBetweenScreens.changeScreen(CreateGroup.this,registerScreen);
                 }
             }

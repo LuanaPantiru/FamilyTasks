@@ -7,6 +7,9 @@
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable-v24/button_not_active.xml" value="0.1935" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable/box.xml" value="0.243" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable/button_style.xml" value="0.1" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable/status_background.xml" value="0.1425" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable/status_finished_background.xml" value="0.1595" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/drawable/status_in_progress_background.xml" value="0.13" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/add_member.xml" value="0.3458333333333333" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/all_members.xml" value="0.33" />
@@ -17,6 +20,7 @@
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/log_in.xml" value="0.22426470588235295" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/main_activity.xml" value="0.1" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/my_account.xml" value="0.1" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/my_tasks.xml" value="0.33" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/new_password.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/one_activity.xml" value="0.35" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/one_family_group.xml" value="0.22" />
@@ -26,6 +30,7 @@
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/remove_members.xml" value="0.12037037037037036" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/reset_password.xml" value="0.2747747747747748" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/set_nickname.xml" value="0.33" />
+        <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/task_details.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/catal/AndroidStudioProjects/FamilyTasks/app/src/main/res/layout/update_account.xml" value="0.365625" />
       </map>
     </option>

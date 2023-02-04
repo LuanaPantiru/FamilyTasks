@@ -32,6 +32,8 @@ public class Task implements Serializable {
     private long idUser;
 
     private long idFamilyGroup;
+    @Ignore
+    private Status statusProp;
 
 
     public Task(String title, String description, int priority, String status, long idUser, long idFamilyGroup) {
@@ -41,6 +43,13 @@ public class Task implements Serializable {
         this.status = status;
         this.idUser = idUser;
         this.idFamilyGroup = idFamilyGroup;
+        if(status.equals("To do")){
+            statusProp = new ToDoStatus();
+        }else if(status.equals("In progress")){
+            statusProp = new InProgressStatus();
+        }else{
+            statusProp = new FinishedStatus();
+        }
     }
     public long getId() {
         return id;
@@ -78,8 +87,19 @@ public class Task implements Serializable {
         return this.status;
     }
 
+    public Status getStatusProp(){
+        return statusProp;
+    }
+
     public void setStatus(String status) {
         this.status = status;
+        if(status.equals("To do")){
+            statusProp = new ToDoStatus();
+        }else if(status.equals("In progress")){
+            statusProp = new InProgressStatus();
+        }else{
+            statusProp = new FinishedStatus();
+        }
     }
     public long getIdUser() {
         return this.idUser;

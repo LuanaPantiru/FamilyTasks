@@ -51,7 +51,7 @@
             android:textColor="@color/green"
             android:text="Status: In Progress"
             android:layout_weight="1"
-            android:background="@drawable/status_background"
+            android:background="@drawable/status_to_do_background"
             android:padding="8dp"/>
 
     </LinearLayout>

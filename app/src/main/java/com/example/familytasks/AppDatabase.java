@@ -14,7 +14,7 @@ import com.example.familytasks.model.NormalMember;
 import com.example.familytasks.model.User;
 import com.example.familytasks.model.Task;
 
-@Database(entities = {User.class,NormalMember.class, AdminMember.class, FamilyGroup.class, Task.class}, version = 7)
+@Database(entities = {User.class,NormalMember.class, AdminMember.class, FamilyGroup.class, Task.class}, version = 8)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract NormalMemberDao normalMemberDao();

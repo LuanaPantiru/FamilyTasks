@@ -78,8 +78,10 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         }
         else {
             Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
-            if (activity.equals(Activities.My_tasks.getActivityName()))
+            if (activity.equals(Activities.My_tasks.getActivityName())){
                 intent.putExtra("taskStatus", "");
+                intent.putExtra("userLogIn",userId);
+            }
             if (activity.equals(Activities.All_finish_task.getActivityName()))
                 intent.putExtra("taskStatus", "Finished");
             if (activity.equals(Activities.All_to_do_tasks.getActivityName()))
