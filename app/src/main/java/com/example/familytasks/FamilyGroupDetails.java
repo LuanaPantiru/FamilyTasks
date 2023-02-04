@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +30,8 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
     private FamilyGroup familyGroup;
     private long userId;
 
-    private GroupRepository groupRepository = new GroupRepository();
     private InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
+    private GroupRepository groupRepository = new GroupRepository();
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -44,6 +46,16 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         TextView familyName = findViewById(R.id.familyGroupName);
         familyName.setText(familyGroup.getFamilyGroupName()+" Family");
         createListOfActivities();
+
+        Button createTaskButton = (Button) findViewById(R.id.createTask);
+        createTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FamilyGroupDetails.this, CreateTask.class);
+                intent.putExtra("familyId",familyId);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -63,9 +75,19 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
             registerScreen.putExtra("familyId",familyId);
             registerScreen.putExtra("userLogIn",userId);
             interactionsBetweenScreens.changeScreen(FamilyGroupDetails.this,registerScreen);
-        }else{
-            Toast.makeText(this,"NU",Toast.LENGTH_SHORT).show();
         }
-
+        else {
+            Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
+            if (activity.equals(Activities.My_tasks.getActivityName()))
+                intent.putExtra("taskStatus", "");
+            if (activity.equals(Activities.All_finish_task.getActivityName()))
+                intent.putExtra("taskStatus", "Finished");
+            if (activity.equals(Activities.All_to_do_tasks.getActivityName()))
+                intent.putExtra("taskStatus", "To do");
+            if (activity.equals(Activities.All_in_progress_task.getActivityName()))
+                intent.putExtra("taskStatus", "In progress");
+            intent.putExtra("familyId",familyId);
+            startActivity(intent);
+        }
     }
 }
