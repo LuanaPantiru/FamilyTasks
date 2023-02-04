@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/update_account"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/firstNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/first_name"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/firstNameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstNameTitle"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="15"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/lastNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstNameValue"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/last_name"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/lastNameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastNameTitle"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="15"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/usernameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastNameValue"
+        android:text="@string/username"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/usernameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernameTitle"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="15"
+        android:textSize="18dp"
+        />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernameValue"
+        android:text="@string/email_address"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/emailValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:ems="15"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="50dp"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/change_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailValue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/change_password" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/change_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/save"
+        android:background="@drawable/button_active"
+        android:textColor="@color/white"/>
+</RelativeLayout>

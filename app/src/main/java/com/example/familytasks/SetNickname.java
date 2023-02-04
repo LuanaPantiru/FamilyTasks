@@ -45,6 +45,7 @@ public class SetNickname extends AppCompatActivity implements OnItemSelectedList
         Bundle bundle = getIntent().getExtras();
         usersToBecomeMembers = bundle.getParcelableArrayList("listUser");
         familyId = bundle.getLong("familyId");
+        long userId = bundle.getLong("userLogIn");
         createListOfUser();
         Button save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +56,8 @@ public class SetNickname extends AppCompatActivity implements OnItemSelectedList
                 }else{
                     newMembers.forEach( m -> memberRepository.insertMember(m));
                     Intent registerScreen = new Intent(SetNickname.this, AllMembers.class);
+                    registerScreen.putExtra("familyId",familyId);
+                    registerScreen.putExtra("userLogIn",userId);
                     interactionsBetweenScreens.changeScreen(SetNickname.this,registerScreen);
                 }
             }

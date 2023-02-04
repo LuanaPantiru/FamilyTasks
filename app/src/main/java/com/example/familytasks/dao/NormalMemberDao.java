@@ -1,6 +1,7 @@
 package com.example.familytasks.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -18,4 +19,6 @@ public interface NormalMemberDao {
     List<NormalMember> getNormalMembersByFamilyId(long familyId);
     @Query("select * from normalmember where memberid = :id")
     NormalMember getMemberById(long id);
+    @Delete
+    void delete(NormalMember member);
 }

@@ -26,6 +26,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
 
     private long familyId;
     private FamilyGroup familyGroup;
+    private long userId;
 
     private GroupRepository groupRepository = new GroupRepository();
     private InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
@@ -38,6 +39,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         setContentView(R.layout.family_group_details);
         Bundle extra = getIntent().getExtras();
         familyId = extra.getLong("familyId");
+        userId = extra.getLong("userLogIn");
         familyGroup = groupRepository.getFamilyGroupByFamilyId(familyId);
         TextView familyName = findViewById(R.id.familyGroupName);
         familyName.setText(familyGroup.getFamilyGroupName()+" Family");
@@ -59,6 +61,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         if(activity.equals(Activities.All_members.getActivityName())){
             Intent registerScreen = new Intent(FamilyGroupDetails.this, AllMembers.class);
             registerScreen.putExtra("familyId",familyId);
+            registerScreen.putExtra("userLogIn",userId);
             interactionsBetweenScreens.changeScreen(FamilyGroupDetails.this,registerScreen);
         }else{
             Toast.makeText(this,"NU",Toast.LENGTH_SHORT).show();

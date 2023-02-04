@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.model.FamilyGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetFamilyGroupsByUserId extends AsyncTask<Long, Void, List<FamilyGroup>> {
@@ -17,7 +18,10 @@ public class GetFamilyGroupsByUserId extends AsyncTask<Long, Void, List<FamilyGr
     @Override
     protected List<FamilyGroup> doInBackground(Long... values) {
         long userId = values[0];
-        return appDatabase.familyGroupDao().getFamilyGroupsByUserId(userId);
+        List<FamilyGroup> familyGroupList = new ArrayList<>();
+        familyGroupList.addAll(appDatabase.familyGroupDao().findFamilyByMembersUsingUserId(userId));
+        familyGroupList.addAll(appDatabase.familyGroupDao().findFamilyByAdminUsingUserId(userId));
+        return familyGroupList;
     }
 
     @Override

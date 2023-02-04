@@ -3,6 +3,7 @@ package com.example.familytasks.repository;
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.ApplicationController;
 import com.example.familytasks.async.AdminMemberInsert;
+import com.example.familytasks.async.DeleteMembersById;
 import com.example.familytasks.async.GetAdminById;
 import com.example.familytasks.async.GetFamilyGroupsByUserId;
 import com.example.familytasks.async.GetNormalUserById;
@@ -67,6 +68,12 @@ public class MemberRepository {
         }catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void removeMembers(List<Long> membersId){
+        for(Long id : membersId){
+            new DeleteMembersById(appDatabase).execute(id);
         }
     }
 }

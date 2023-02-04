@@ -52,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         Button createGroup = findViewById(R.id.createGroup);
         createGroup.setOnClickListener(view ->{
             Intent registerScreen = new Intent(MainActivity.this, CreateGroup.class);
+            registerScreen.putExtra("userLogIn",userId);
+            interactionsBetweenScreens.changeScreen(MainActivity.this,registerScreen);
+        });
+        Button account = findViewById(R.id.account);
+        account.setOnClickListener(view ->{
+            Intent registerScreen = new Intent(MainActivity.this, MyAccount.class);
+            registerScreen.putExtra("userLogIn",userId);
             interactionsBetweenScreens.changeScreen(MainActivity.this,registerScreen);
         });
     }
@@ -66,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     public void onItemClick(Object obj) {
         Intent registerScreen = new Intent(MainActivity.this, FamilyGroupDetails.class);
+        registerScreen.putExtra("userLogIn",userId);
         registerScreen.putExtra("familyId",((FamilyGroup) obj).getId());
         interactionsBetweenScreens.changeScreen(MainActivity.this,registerScreen);
     }

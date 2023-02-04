@@ -26,6 +26,7 @@ public class AllMembers extends AppCompatActivity{
     private GroupRepository groupRepository = new GroupRepository();
     private InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
     private FamilyGroup familyGroup;
+    private long userId;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class AllMembers extends AppCompatActivity{
         setContentView(R.layout.all_members);
         Bundle extra = getIntent().getExtras();
         long familyId = extra.getLong("familyId");
+        userId = extra.getLong("userLogIn");
         familyGroup = groupRepository.getFamilyGroupByFamilyId(familyId);
         AdminMember admin = familyGroup.getAdminMember();
         TextView adminName = findViewById(R.id.memberName);
@@ -40,11 +42,27 @@ public class AllMembers extends AppCompatActivity{
         TextView adminNickname = findViewById(R.id.memberNickname);
         adminNickname.setText(admin.getUserNickname());
         createListOfNormalMembers();
+        Button removeMembers = findViewById(R.id.deleteMember);
         Button addMember = findViewById(R.id.addMember);
+        if(admin.getUserId() == userId){
+            removeMembers.setVisibility(View.VISIBLE);
+            addMember.setVisibility(View.VISIBLE);
+        }
+        removeMembers.setOnClickListener(view -> {
+            if(removeMembers.getVisibility() == View.VISIBLE){
+                Intent registerScreen = new Intent(AllMembers.this, RemoveMembers.class);
+                registerScreen.putExtra("familyId",familyId);
+                registerScreen.putExtra("userLogIn",userId);
+                interactionsBetweenScreens.changeScreen(AllMembers.this,registerScreen);
+            }
+        });
         addMember.setOnClickListener(view -> {
-            Intent registerScreen = new Intent(AllMembers.this, AddMember.class);
-            registerScreen.putExtra("familyId",familyId);
-            interactionsBetweenScreens.changeScreen(AllMembers.this,registerScreen);
+            if(addMember.getVisibility() == View.VISIBLE){
+                Intent registerScreen = new Intent(AllMembers.this, AddMember.class);
+                registerScreen.putExtra("familyId",familyId);
+                registerScreen.putExtra("userLogIn",userId);
+                interactionsBetweenScreens.changeScreen(AllMembers.this,registerScreen);
+            }
         });
     }
 

@@ -7,6 +7,7 @@ import com.example.familytasks.async.GetUserById;
 import com.example.familytasks.async.GetUserByUsername;
 import com.example.familytasks.async.GetUserByUsernameOrEmail;
 import com.example.familytasks.async.GetUsers;
+import com.example.familytasks.async.UpdateUser;
 import com.example.familytasks.async.UserInsert;
 import com.example.familytasks.async.UserUpdate;
 import com.example.familytasks.model.User;
@@ -115,6 +116,10 @@ public class UserRepository {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void updateUser(User user){
+        new UpdateUser(appDatabase).execute(user);
     }
 
 }

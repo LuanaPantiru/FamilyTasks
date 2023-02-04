@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class CreateGroup extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private String groupName;
     private String nickname;
-    private int userId=1;
+    private long userId;
     private final List<String> familyMemberNicknames = Arrays.stream(FamilyMemberNickname.values()).map(Enum::toString).collect(Collectors.toList());
 
     private MemberRepository memberRepository = new MemberRepository();
@@ -40,6 +40,7 @@ public class CreateGroup extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
+        userId = getIntent().getExtras().getLong("userLogIn");
         Spinner spinnerNickname = findViewById(R.id.nickname);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateGroup.this,
                 android.R.layout.simple_spinner_item, familyMemberNicknames);

@@ -75,6 +75,7 @@ public class AddMember extends AppCompatActivity implements OnCheckedChangeListe
             bundle.putParcelableArrayList("listUser", (ArrayList<? extends Parcelable>) newMembers);
             registerScreen.putExtras(bundle);
             registerScreen.putExtra("familyId",familyId);
+            registerScreen.putExtra("userLogIn",familyGroup.getAdminMember().getUserId());
             interactionsBetweenScreens.changeScreen(AddMember.this,registerScreen);
         });
     }
@@ -89,7 +90,8 @@ public class AddMember extends AppCompatActivity implements OnCheckedChangeListe
     }
 
     @Override
-    public void onCheckedChangeListener(Boolean isChecked, User user) {
+    public void onCheckedChangeListener(Boolean isChecked, Object obj) {
+        User user = (User) obj;
         if(isChecked){
             newMembers.add(user);
         }else{
