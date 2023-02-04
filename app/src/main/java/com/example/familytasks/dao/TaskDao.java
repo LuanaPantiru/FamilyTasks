@@ -1,9 +1,12 @@
 package com.example.familytasks.dao;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Entity;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 
 import com.example.familytasks.model.NormalMember;
@@ -23,4 +26,6 @@ public interface TaskDao {
     List<Task> getTasksByStatus(String status,Long familyId);
     @Delete
     void delete(Task task);
+    @Update
+    void update(Task... tasks);
 }

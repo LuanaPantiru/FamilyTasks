@@ -98,6 +98,18 @@ public class TaskDetails extends AppCompatActivity {
             Intent mainScreen = new Intent(TaskDetails.this,LogIn.class);
             interactionsBetweenScreens.changeScreen(TaskDetails.this,mainScreen);
         });
+        Button btnUpdate = findViewById(R.id.btnUpdate);
+        btnUpdate.setOnClickListener(view ->{
+            task.setTitle(taskTitle.getText().toString());
+            task.setDescription(taskDescription.getText().toString());
+            task.setIdUser(userRepository.findUserByUsername(taskAssignee.getSelectedItem().toString()).getId());
+//            Task newTask = new Task(, , task.getPriority(), task.getStatusProp().getStatusName(), 1 , task.getIdFamilyGroup()); //
+
+            taskRepository.updateTask(task);
+            Intent mainScreen = new Intent(TaskDetails.this,LogIn.class);
+            interactionsBetweenScreens.changeScreen(TaskDetails.this,mainScreen);
+        });
+
     }
 
 

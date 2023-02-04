@@ -2,17 +2,15 @@ package com.example.familytasks.repository;
 
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.ApplicationController;
-import com.example.familytasks.async.FamilyGroupInsert;
-import com.example.familytasks.async.GetAdminById;
-import com.example.familytasks.async.GetFamilyGroupByFamilyId;
 import com.example.familytasks.async.GetTaskById;
 import com.example.familytasks.async.GetTasks;
 import com.example.familytasks.async.GetTasksByStatus;
 import com.example.familytasks.async.TaskDeleteById;
 import com.example.familytasks.async.TaskInsert;
-import com.example.familytasks.model.AdminMember;
-import com.example.familytasks.model.FamilyGroup;
+import com.example.familytasks.async.TaskUpdate;
+import com.example.familytasks.async.UpdateUser;
 import com.example.familytasks.model.Task;
+import com.example.familytasks.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +38,9 @@ public class TaskRepository {
             e.printStackTrace();
         }
         return null;
+    }
+    public void updateTask(Task task){
+        new TaskUpdate(appDatabase).execute(task);
     }
 
     public List<Task>getAllTasks(Long familyId){
