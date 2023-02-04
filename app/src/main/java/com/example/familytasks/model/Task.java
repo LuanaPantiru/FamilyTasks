@@ -19,38 +19,39 @@ import java.io.Serializable;
                 parentColumns = "id",
                 childColumns = "idFamilyGroup",
                 onDelete = NO_ACTION)
-}, indices = {@Index("idUser"),@Index(("idFamilyGroup"))})
+}, indices = {@Index("idUser"), @Index(("idFamilyGroup"))})
 public class Task implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String title;
     private String description;
-    private int priority;
+    private String priority;
     private String status;
 
     private long idUser;
 
     private long idFamilyGroup;
     @Ignore
-    private Status statusProp;
+    protected Status statusProp;
 
 
-    public Task(String title, String description, int priority, String status, long idUser, long idFamilyGroup) {
+    public Task(String title, String description, String priority, String status, long idUser, long idFamilyGroup) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.status = status;
         this.idUser = idUser;
         this.idFamilyGroup = idFamilyGroup;
-        if(status.equals("To do")){
+        if (status.equals("To do")) {
             statusProp = new ToDoStatus();
-        }else if(status.equals("In progress")){
+        } else if (status.equals("In progress")) {
             statusProp = new InProgressStatus();
-        }else{
+        } else {
             statusProp = new FinishedStatus();
         }
     }
+
     public long getId() {
         return id;
     }
@@ -58,6 +59,7 @@ public class Task implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
     public String getTitle() {
         return this.title;
     }
@@ -75,11 +77,11 @@ public class Task implements Serializable {
     }
 
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
@@ -87,20 +89,17 @@ public class Task implements Serializable {
         return this.status;
     }
 
-    public Status getStatusProp(){
-        return statusProp;
-    }
-
     public void setStatus(String status) {
         this.status = status;
-        if(status.equals("To do")){
+        if (status.equals("To do")) {
             statusProp = new ToDoStatus();
-        }else if(status.equals("In progress")){
+        } else if (status.equals("In progress")) {
             statusProp = new InProgressStatus();
-        }else{
+        } else {
             statusProp = new FinishedStatus();
         }
     }
+
     public long getIdUser() {
         return this.idUser;
     }
@@ -108,12 +107,21 @@ public class Task implements Serializable {
     public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
+
     public long getIdFamilyGroup() {
         return this.idFamilyGroup;
     }
 
     public void setIdFamilyGroup(long idFamilyGroup) {
         this.idFamilyGroup = idFamilyGroup;
+    }
+
+    public String getTextColor(){
+        return statusProp.getColor();
+    }
+
+    public int getBackground(){
+        return statusProp.getBackground();
     }
 
 }

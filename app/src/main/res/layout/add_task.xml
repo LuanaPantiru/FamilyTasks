@@ -32,7 +32,7 @@
         android:layout_height="60dp"
         android:hint="Task description"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/priority_editText"
+        app:layout_constraintTop_toBottomOf="@+id/priority_spinner"
         tools:layout_editor_absoluteX="29dp" />
 
     <Button
@@ -45,13 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/priority_editText"
+    <Spinner
+        android:id="@+id/priority_spinner"
         android:layout_width="173dp"
         android:layout_height="50dp"
-        android:ems="10"
-        android:hint="Task priority"
-        android:inputType="numberSigned"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_title_edit_text" />
 

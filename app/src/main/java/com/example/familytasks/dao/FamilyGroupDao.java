@@ -1,11 +1,13 @@
 package com.example.familytasks.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.familytasks.model.AdminMember;
 import com.example.familytasks.model.FamilyGroup;
+import com.example.familytasks.model.NormalMember;
 
 import java.util.List;
 
@@ -19,4 +21,6 @@ public interface FamilyGroupDao {
     List<FamilyGroup> findFamilyByMembersUsingUserId(long userId);
     @Query("select * from familygroup where id = :familyId")
     FamilyGroup getFamilyGroupsByFamilyId(long familyId);
+    @Delete
+    void delete(FamilyGroup group);
 }

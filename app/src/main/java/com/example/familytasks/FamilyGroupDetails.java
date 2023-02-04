@@ -4,8 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +59,51 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
                 Intent intent = new Intent(FamilyGroupDetails.this, CreateTask.class);
                 intent.putExtra("familyId",familyId);
                 startActivity(intent);
+            }
+        });
+
+        Button deleteGroup = (Button) findViewById(R.id.deleteGroup);
+        if(userId == familyGroup.getAdminMember().getUserId()){
+            deleteGroup.setVisibility(View.VISIBLE);
+        }
+        deleteGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(deleteGroup.getVisibility()==View.VISIBLE){
+                    // inflate the layout of the popup window
+                    LayoutInflater inflater = (LayoutInflater)
+                            getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popupView = inflater.inflate(R.layout.popup, null);
+
+                    // create the popup window
+                    int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    boolean focusable = true; // lets taps outside the popup also dismiss it
+                    final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                    // show the popup window
+                    // which view you pass in doesn't matter, it is only used for the window tolken
+                    popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                    Button yes = popupView.findViewById(R.id.yes);
+                    Button no = popupView.findViewById(R.id.no);
+                    yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            popupWindow.dismiss();
+                            groupRepository.deleteGroup(familyId);
+                            Intent registerScreen = new Intent(FamilyGroupDetails.this, AllMembers.class);
+                            registerScreen.putExtra("id",userId);
+                            interactionsBetweenScreens.changeScreen(FamilyGroupDetails.this,registerScreen);
+                        }
+                    });
+
+                    no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                }
             }
         });
 

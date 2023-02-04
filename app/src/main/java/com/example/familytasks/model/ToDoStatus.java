@@ -3,10 +3,6 @@ package com.example.familytasks.model;
 import com.example.familytasks.R;
 
 public class ToDoStatus implements Status{
-    @Override
-    public String getStatusName() {
-        return "To do";
-    }
 
     @Override
     public String getColor() {

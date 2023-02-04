@@ -2,6 +2,7 @@ package com.example.familytasks.repository;
 
 import com.example.familytasks.AppDatabase;
 import com.example.familytasks.ApplicationController;
+import com.example.familytasks.async.DeleteFamilyGroupById;
 import com.example.familytasks.async.FamilyGroupInsert;
 import com.example.familytasks.async.GetAdminById;
 import com.example.familytasks.async.GetFamilyGroupByFamilyId;
@@ -60,6 +61,10 @@ public class GroupRepository {
             e.printStackTrace();
         }
         return members;
+    }
+
+    public void deleteGroup(long familyId){
+        new DeleteFamilyGroupById(appDatabase).execute(familyId);
     }
 
 }

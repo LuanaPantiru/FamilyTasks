@@ -28,8 +28,6 @@ public class CreateTask extends AppCompatActivity {
 
     private EditText taskNameEditText;
     private EditText taskDescriptionEditText;
-    private EditText taskPriorityEditText;
-    private Spinner taskStatusSpinner;
     private Button saveTaskButton;
     private TaskRepository taskRepository = new TaskRepository();
     private GroupRepository groupRepository = new GroupRepository();
@@ -48,8 +46,6 @@ public class CreateTask extends AppCompatActivity {
         taskNameEditText = (EditText) findViewById(R.id.task_title_edit_text);
         taskDescriptionEditText = (EditText) findViewById(R.id.task_description_edit_text);
         saveTaskButton = (Button) findViewById(R.id.save_task_button);
-        taskPriorityEditText = (EditText) findViewById(R.id.priority_editText);
-        taskStatusSpinner = (Spinner) findViewById(R.id.status_spinner);
 
         List<String> spinnerAssignees = Collections.<String> emptyList();
         FamilyGroup familyGroup = groupRepository.getFamilyGroupByFamilyId(familyId);
@@ -57,6 +53,13 @@ public class CreateTask extends AppCompatActivity {
             spinnerAssignees = familyGroup.getMembers().stream().map(normalMember -> normalMember.getUser().getUserName()).collect(Collectors.toList());
             spinnerAssignees.add(familyGroup.getAdminMember().getUser().getUserName());
         }
+
+        String[] spinnerPriority = {"Low", "Medium","High"};
+        Spinner prioritySpinner = (Spinner) findViewById(R.id.priority_spinner);
+        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerPriority);
+        priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prioritySpinner.setAdapter(priorityAdapter);
+
         String[] spinnerStatus = {"To do", "In progress","Finished"};
         Spinner statusSpinner = (Spinner) findViewById(R.id.status_spinner);
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerStatus);
@@ -73,8 +76,8 @@ public class CreateTask extends AppCompatActivity {
             public void onClick(View v) {
                 String taskName = taskNameEditText.getText().toString();
                 String taskDescription = taskDescriptionEditText.getText().toString();
-                Integer taskPriority = Integer.parseInt(taskPriorityEditText.getText().toString());
-                String taskStatus = taskStatusSpinner.getSelectedItem().toString();
+                String taskPriority = prioritySpinner.getSelectedItem().toString();
+                String taskStatus = statusSpinner.getSelectedItem().toString();
                 String username = assigneeSpinner.getSelectedItem().toString();
 
                 long idUser = userRepository.findUserByUsername(username).getId();

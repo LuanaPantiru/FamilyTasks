@@ -3,6 +3,8 @@ package com.example.familytasks;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -20,6 +22,7 @@ import com.example.familytasks.repository.UserRepository;
 import com.example.familytasks.util.InteractionsBetweenScreens;
 import com.example.familytasks.util.impl.InteractionBetweenScreensImpl;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +33,10 @@ public class TaskDetails extends AppCompatActivity {
     private TaskRepository taskRepository = new TaskRepository();
     private UserRepository userRepository = new UserRepository();
     private GroupRepository groupRepository = new GroupRepository();
+    private Spinner statusSpinner;
+    private Task task;
+    private final List<String> spinnerStatusValues = Arrays.asList("To do", "In progress", "Finished");
+    private final List<String> spinnerPriorityValues = Arrays.asList("Low", "Medium", "High");
 
     private final InteractionsBetweenScreens interactionsBetweenScreens = new InteractionBetweenScreensImpl();
 
@@ -39,7 +46,7 @@ public class TaskDetails extends AppCompatActivity {
         setContentView(R.layout.task_details);
 
         long taskId = getIntent().getExtras().getLong("taskId");
-        Task task = taskRepository.getTaskById(taskId);
+        task = taskRepository.getTaskById(taskId);
 
         TextView taskTitle = (TextView) findViewById(R.id.task_title);
         taskTitle.setText(task.getTitle());
@@ -47,21 +54,31 @@ public class TaskDetails extends AppCompatActivity {
         TextView taskDescription = (TextView) findViewById(R.id.task_description);
         taskDescription.setText(task.getDescription());
 
-        String[] spinnerStatus = {"To do", "In progress","Finished"};
-        Spinner statusSpinner = (Spinner) findViewById(R.id.task_status);
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerStatus);
+
+        statusSpinner = (Spinner) findViewById(R.id.task_status);
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(this, R.layout.spinner_status, spinnerStatusValues);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         statusSpinner.setAdapter(statusAdapter);
-        statusSpinner.setBackgroundColor(Color.parseColor(task.getStatusProp().getColor()));
+        int index = spinnerStatusValues.indexOf(task.getStatus());
+        statusSpinner.setSelection(index);
+        statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String newStatus = spinnerStatusValues.get(i);
+                task.setStatus(newStatus);
+                TextView textView = (TextView) adapterView.getChildAt(0);
+                textView.setTextColor(Color.parseColor(task.getTextColor()));
+                statusSpinner.setBackground(ContextCompat.getDrawable(TaskDetails.this, task.getBackground()));
+            }
 
-//        Spinner taskStatus =  findViewById(R.id.task_status);
-//        taskStatus.setText(task.getStatusProp().getStatusName());
-//        taskStatus.setTextColor(Color.parseColor(task.getStatusProp().getColor()));
-//        taskStatus.setBackground(ContextCompat.getDrawable(this, task.getStatusProp().getBackground()));
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
-
-        List<String> spinnerAssignees = Collections.<String> emptyList();
+        List<String> spinnerAssignees = Collections.<String>emptyList();
 
         FamilyGroup familyGroup = groupRepository.getFamilyGroupByFamilyId(task.getIdFamilyGroup());
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -80,37 +97,58 @@ public class TaskDetails extends AppCompatActivity {
         //User user = userRepository.findUserById(task.getIdUser());
         //taskAssignee.setText(user.getUserName());
 
-        TextView taskPriority = (TextView) findViewById(R.id.task_priority);
-        if (task.getPriority() <= 2) {
-            taskPriority.setText("Priority: High");
-            taskPriority.setTextColor(Color.RED);
-        } else if (task.getPriority() <= 5) {
-            taskPriority.setText("Priority: Medium");
-            taskPriority.setTextColor(Color.YELLOW);
-        } else {
-            taskPriority.setText("Priority: Low");
-            taskPriority.setTextColor(Color.GREEN);
-        }
-        Button btnDelete = findViewById(R.id.btnDelete);
+        Spinner taskPriority = findViewById(R.id.task_priority);
+        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<String>(this, R.layout.spinner_priority, spinnerPriorityValues);
+        priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        taskPriority.setAdapter(priorityAdapter);
+        taskPriority.setSelection(spinnerPriorityValues.indexOf(task.getPriority()));
+        taskPriority.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String newPriority = spinnerPriorityValues.get(i);
+                task.setPriority(newPriority);
+                TextView textView = (TextView) adapterView.getChildAt(0);
+                if (task.getPriority().equals("High")) {
+                    textView.setTextColor(Color.RED);
+                } else if (task.getPriority().equals("Medium")) {
+                    textView.setTextColor(Color.YELLOW);
+                } else {
+                    textView.setTextColor(Color.GREEN);
+                }
+            }
 
-        btnDelete.setOnClickListener(view ->{
-            taskRepository.deleteTask(taskId);
-            Intent mainScreen = new Intent(TaskDetails.this,LogIn.class);
-            interactionsBetweenScreens.changeScreen(TaskDetails.this,mainScreen);
-        });
-        Button btnUpdate = findViewById(R.id.btnUpdate);
-        btnUpdate.setOnClickListener(view ->{
-            task.setTitle(taskTitle.getText().toString());
-            task.setDescription(taskDescription.getText().toString());
-            task.setIdUser(userRepository.findUserByUsername(taskAssignee.getSelectedItem().toString()).getId());
+                @Override
+                public void onNothingSelected (AdapterView < ? > adapterView){
+
+                }
+            });
+
+            Button btnDelete = findViewById(R.id.btnDelete);
+
+        btnDelete.setOnClickListener(view ->
+
+            {
+                taskRepository.deleteTask(taskId);
+                Intent mainScreen = new Intent(TaskDetails.this, FamilyGroupDetails.class);
+                mainScreen.putExtra("familyId",task.getIdFamilyGroup());
+                mainScreen.putExtra("userLogIn",task.getIdUser());
+                interactionsBetweenScreens.changeScreen(TaskDetails.this, mainScreen);
+            });
+            Button btnUpdate = findViewById(R.id.btnUpdate);
+        btnUpdate.setOnClickListener(view ->
+
+            {
+                task.setTitle(taskTitle.getText().toString());
+                task.setDescription(taskDescription.getText().toString());
+                task.setIdUser(userRepository.findUserByUsername(taskAssignee.getSelectedItem().toString()).getId());
 //            Task newTask = new Task(, , task.getPriority(), task.getStatusProp().getStatusName(), 1 , task.getIdFamilyGroup()); //
 
-            taskRepository.updateTask(task);
-            Intent mainScreen = new Intent(TaskDetails.this,LogIn.class);
-            interactionsBetweenScreens.changeScreen(TaskDetails.this,mainScreen);
-        });
+                taskRepository.updateTask(task);
+                Intent mainScreen = new Intent(TaskDetails.this, FamilyGroupDetails.class);
+                mainScreen.putExtra("familyId",task.getIdFamilyGroup());
+                mainScreen.putExtra("userLogIn",task.getIdUser());
+                interactionsBetweenScreens.changeScreen(TaskDetails.this, mainScreen);
+            });
 
+        }
     }
-
-
-}

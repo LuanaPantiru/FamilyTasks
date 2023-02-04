@@ -3,10 +3,6 @@ package com.example.familytasks.model;
 import com.example.familytasks.R;
 
 public class InProgressStatus implements Status{
-    @Override
-    public String getStatusName() {
-        return "In progress";
-    }
 
     @Override
     public String getColor() {
