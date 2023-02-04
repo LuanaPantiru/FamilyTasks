@@ -8,6 +8,7 @@ import com.example.familytasks.async.GetFamilyGroupByFamilyId;
 import com.example.familytasks.async.GetTaskById;
 import com.example.familytasks.async.GetTasks;
 import com.example.familytasks.async.GetTasksByStatus;
+import com.example.familytasks.async.TaskDeleteById;
 import com.example.familytasks.async.TaskInsert;
 import com.example.familytasks.model.AdminMember;
 import com.example.familytasks.model.FamilyGroup;
@@ -27,6 +28,14 @@ public class TaskRepository {
     public Long createTask(Task task){
         try {
             return new TaskInsert(appDatabase).execute(task).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public Long deleteTask(long taskId){
+        try {
+            return new TaskDeleteById(appDatabase).execute(taskId).get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }

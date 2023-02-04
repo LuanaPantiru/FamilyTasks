@@ -1,10 +1,12 @@
 package com.example.familytasks.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 
+import com.example.familytasks.model.NormalMember;
 import com.example.familytasks.model.Task;
 
 import java.util.List;
@@ -19,4 +21,6 @@ public interface TaskDao {
     Task getTaskById(long taskId);
     @Query(value = "select * from task where status = :status and idFamilyGroup =:familyId")
     List<Task> getTasksByStatus(String status,Long familyId);
+    @Delete
+    void delete(Task task);
 }

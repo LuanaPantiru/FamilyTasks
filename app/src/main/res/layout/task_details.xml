@@ -9,22 +9,24 @@
     <TextView
         android:id="@+id/task_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:layout_height="57dp"
+        android:layout_marginBottom="8dp"
+        android:editable="true"
         android:gravity="center_vertical"
         android:text="Task Title"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/task_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/gray"
+        android:layout_height="57dp"
+        android:layout_marginBottom="16dp"
+        android:editable="true"
         android:text="Task Description"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="@color/gray"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,12 +38,12 @@
             android:id="@+id/task_priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/red"
-            android:text="Priority: High"
             android:layout_weight="1"
-            android:background="@drawable/priority_background"
-            android:padding="8dp"/>
+            android:background="@drawable/assignee_background"
+            android:padding="8dp"
+            android:text="Priority: High"
+            android:textColor="@color/red"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/task_status"
@@ -51,7 +53,7 @@
             android:textColor="@color/green"
             android:text="Status: In Progress"
             android:layout_weight="1"
-            android:background="@drawable/status_to_do_background"
+
             android:padding="8dp"/>
 
     </LinearLayout>
@@ -66,5 +68,27 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/assignee_background"
         android:padding="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Update" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Delete" />
+    </LinearLayout>
 
 </LinearLayout>
