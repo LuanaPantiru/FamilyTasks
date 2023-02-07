@@ -26,5 +26,5 @@ Diagramele sunt realizate de Cinca Adrian
 
 ## Designed pattern
 1. Singleton - pentru a se realiza conectarea la baza de date; clasa este ApplicationController si este folosita in clasele de tip repository
-2. Template Method - este reprezentata de clasa abstracta Membre, care este extrinsa de clasele AdminMember si NormalMember
+2. Template Method - este reprezentata de clasa abstracta Member, care este extinsa de clasele AdminMember si NormalMember
 3. Bridge - este realizata intre clasa Task si interfata Status; interfata Status este implementata de catre clasele ToDoStatus, InProgressStatus si FinishedStatus
