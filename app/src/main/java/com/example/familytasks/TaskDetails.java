@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -46,6 +47,8 @@ public class TaskDetails extends AppCompatActivity {
         setContentView(R.layout.task_details);
 
         long taskId = getIntent().getExtras().getLong("taskId");
+        long userId = getIntent().getExtras().getLong("userLogIn");
+        String taskStatus = getIntent().getExtras().getString("taskStatus");
         task = taskRepository.getTaskById(taskId);
 
         TextView taskTitle = (TextView) findViewById(R.id.task_title);
@@ -53,6 +56,18 @@ public class TaskDetails extends AppCompatActivity {
 
         TextView taskDescription = (TextView) findViewById(R.id.task_description);
         taskDescription.setText(task.getDescription());
+
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TaskDetails.this, MyTasks.class);
+                intent.putExtra("userLogIn",userId);
+                intent.putExtra("familyId",task.getIdFamilyGroup());
+                intent.putExtra("taskStatus",taskStatus);
+                startActivity(intent);
+            }
+        });
 
 
         statusSpinner = (Spinner) findViewById(R.id.task_status);
@@ -124,6 +139,9 @@ public class TaskDetails extends AppCompatActivity {
             });
 
             Button btnDelete = findViewById(R.id.btnDelete);
+            if(familyGroup.getAdminMember().getUserId()==userId){
+                btnDelete.setVisibility(View.VISIBLE);
+            }
 
         btnDelete.setOnClickListener(view ->
 

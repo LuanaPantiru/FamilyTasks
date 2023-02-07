@@ -83,7 +83,7 @@ public class LogIn extends AppCompatActivity{
         email = ((EditText) findViewById(R.id.email)).getText().toString();
         password = ((EditText) findViewById(R.id.password)).getText().toString();
         if(!email.isEmpty() && !password.isEmpty()){
-            if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+            if(email.matches("[a-zA-Z0-9._-]+@[a-z.]+\\.+[a-z]+")){
                 user = userRepository.findUserByEmail(email);
                 if (user != null) {
                     if(!user.getActive()){

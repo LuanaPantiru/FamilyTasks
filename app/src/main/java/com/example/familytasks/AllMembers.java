@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -42,6 +43,16 @@ public class AllMembers extends AppCompatActivity{
         TextView adminNickname = findViewById(R.id.memberNickname);
         adminNickname.setText(admin.getUserNickname());
         createListOfNormalMembers();
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AllMembers.this, FamilyGroupDetails.class);
+                intent.putExtra("userLogIn",userId);
+                intent.putExtra("familyId",familyId);
+                startActivity(intent);
+            }
+        });
         Button removeMembers = findViewById(R.id.deleteMember);
         Button addMember = findViewById(R.id.addMember);
         if(admin.getUserId() == userId){

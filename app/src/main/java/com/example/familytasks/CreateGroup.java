@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -41,6 +42,15 @@ public class CreateGroup extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
         userId = getIntent().getExtras().getLong("userLogIn");
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CreateGroup.this, MainActivity.class);
+                intent.putExtra("id",userId);
+                startActivity(intent);
+            }
+        });
         Spinner spinnerNickname = findViewById(R.id.nickname);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateGroup.this,
                 android.R.layout.simple_spinner_item, familyMemberNicknames);

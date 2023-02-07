@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -47,6 +48,15 @@ public class SetNickname extends AppCompatActivity implements OnItemSelectedList
         familyId = bundle.getLong("familyId");
         long userId = bundle.getLong("userLogIn");
         createListOfUser();
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SetNickname.this, AddMember.class);
+                intent.putExtra("familyId",familyId);
+                startActivity(intent);
+            }
+        });
         Button save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override

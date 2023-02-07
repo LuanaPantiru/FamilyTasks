@@ -37,7 +37,7 @@ public class ResetPassword extends AppCompatActivity {
                     User user = userRepository.findUserByEmail(email);
                     if(user!=null){
                         int code = (int)Math.floor(Math.random()*(9999-1000+1)+1000);
-                        MailApi mailApi = new MailApi(ResetPassword.this,email,"Reset Password", String.valueOf(code));
+                        MailApi mailApi = new MailApi(ResetPassword.this,email,"Reset Password", "The code to reset the password is: "+String.valueOf(code));
                         mailApi.execute();
                         Intent registerScreen = new Intent(ResetPassword.this, CheckCode.class);
                         registerScreen.putExtra("code",code);

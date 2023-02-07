@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.RequiresApi;
@@ -39,6 +40,17 @@ public class MyTasks extends AppCompatActivity {
         familyId = extra.getLong("familyId");
         userId = extra.getLong("userLogIn");
 
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyTasks.this, FamilyGroupDetails.class);
+                intent.putExtra("userLogIn",userId);
+                intent.putExtra("familyId",familyId);
+                startActivity(intent);
+            }
+        });
+
         ListView tasksListView = (ListView) findViewById(R.id.my_tasks_list_view);
 
         List<Task> taskList = new ArrayList<>();
@@ -63,6 +75,8 @@ public class MyTasks extends AppCompatActivity {
                 Task task = finalTaskList.get(position);
                 Intent intent = new Intent(MyTasks.this, TaskDetails.class);
                 intent.putExtra("taskId", task.getId());
+                intent.putExtra("taskStatus",taskStatus);
+                intent.putExtra("userLogIn",userId);
                 startActivity(intent);
             }
         });

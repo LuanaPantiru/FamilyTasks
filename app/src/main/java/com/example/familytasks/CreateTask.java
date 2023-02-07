@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ public class CreateTask extends AppCompatActivity {
 
         Bundle extra = getIntent().getExtras();
         familyId = extra.getLong("familyId");
+        long userId = extra.getLong("userLogIn");
 
         taskNameEditText = (EditText) findViewById(R.id.task_title_edit_text);
         taskDescriptionEditText = (EditText) findViewById(R.id.task_description_edit_text);
@@ -53,6 +55,17 @@ public class CreateTask extends AppCompatActivity {
             spinnerAssignees = familyGroup.getMembers().stream().map(normalMember -> normalMember.getUser().getUserName()).collect(Collectors.toList());
             spinnerAssignees.add(familyGroup.getAdminMember().getUser().getUserName());
         }
+
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CreateTask.this, FamilyGroupDetails.class);
+                intent.putExtra("userLogIn",userId);
+                intent.putExtra("familyId",familyId);
+                startActivity(intent);
+            }
+        });
 
         String[] spinnerPriority = {"Low", "Medium","High"};
         Spinner prioritySpinner = (Spinner) findViewById(R.id.priority_spinner);

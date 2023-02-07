@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -36,6 +38,15 @@ public class UpdateAccount extends AppCompatActivity {
         username.setText(user.getUserName());
         EditText email = findViewById(R.id.emailValue);
         email.setText(user.getEmail());
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UpdateAccount.this, MyAccount.class);
+                intent.putExtra("userLogIn",userId);
+                startActivity(intent);
+            }
+        });
         Button save = findViewById(R.id.save);
         save.setOnClickListener(view ->{
             String newFirstName = firstName.getText().toString();

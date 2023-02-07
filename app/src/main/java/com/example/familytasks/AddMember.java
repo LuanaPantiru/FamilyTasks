@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -49,6 +50,16 @@ public class AddMember extends AppCompatActivity implements OnCheckedChangeListe
         usersWhichAlreadyAreMembers = familyGroup.getMembers().stream().map(m -> m.getUser().getId()).collect(Collectors.toList());
         usersWhichAlreadyAreMembers.add(familyGroup.getAdminMember().getUser().getId());
         createListOfUsers();
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddMember.this, FamilyGroupDetails.class);
+                intent.putExtra("userLogIn",familyGroup.getAdminMember().getUserId());
+                intent.putExtra("familyId",familyId);
+                startActivity(intent);
+            }
+        });
         EditText search = findViewById(R.id.searchUser);
         search.addTextChangedListener(new TextWatcher() {
             @Override

@@ -11,9 +11,9 @@
     <string name="register">Register</string>
     <string name="log_out">Log out</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="message_reset_password">Enter the email address associated with your account and we\'ll send you a SMS with a code to reset your password.</string>
+    <string name="message_reset_password">Enter the email address associated with your account and we\'ll send you a email with a code to reset your password.</string>
     <string name="send">Send</string>
-    <string name="message_check_code">Enter the code you received via SMS.</string>
+    <string name="message_check_code">Enter the code you received via email.</string>
     <string name="check_code">Check code</string>
     <string name="change_password">Change password</string>
     <string name="enter_a_new_password">Enter a new password.</string>

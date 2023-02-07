@@ -3,7 +3,9 @@ package com.example.familytasks;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -32,6 +34,15 @@ public class MyAccount extends AppCompatActivity {
         username.setText(user.getUserName());
         TextView email = findViewById(R.id.emailValue);
         email.setText(user.getEmail());
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyAccount.this, MainActivity.class);
+                intent.putExtra("id",userId);
+                startActivity(intent);
+            }
+        });
         Button update = findViewById(R.id.update);
         update.setOnClickListener(view ->{
             Intent registerScreen = new Intent(MyAccount.this, UpdateAccount.class);

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -52,12 +53,23 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
         familyName.setText(familyGroup.getFamilyGroupName()+" Family");
         createListOfActivities();
 
+        ImageView imageView = findViewById(R.id.back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FamilyGroupDetails.this, MainActivity.class);
+                intent.putExtra("id",userId);
+                startActivity(intent);
+            }
+        });
+
         Button createTaskButton = (Button) findViewById(R.id.createTask);
         createTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FamilyGroupDetails.this, CreateTask.class);
                 intent.putExtra("familyId",familyId);
+                intent.putExtra("userLogIn",userId);
                 startActivity(intent);
             }
         });
@@ -91,7 +103,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
                         public void onClick(View view) {
                             popupWindow.dismiss();
                             groupRepository.deleteGroup(familyId);
-                            Intent registerScreen = new Intent(FamilyGroupDetails.this, AllMembers.class);
+                            Intent registerScreen = new Intent(FamilyGroupDetails.this, MainActivity.class);
                             registerScreen.putExtra("id",userId);
                             interactionsBetweenScreens.changeScreen(FamilyGroupDetails.this,registerScreen);
                         }
@@ -130,7 +142,6 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
             Intent intent = new Intent(FamilyGroupDetails.this, MyTasks.class);
             if (activity.equals(Activities.My_tasks.getActivityName())){
                 intent.putExtra("taskStatus", "");
-                intent.putExtra("userLogIn",userId);
             }
             if (activity.equals(Activities.All_finish_task.getActivityName()))
                 intent.putExtra("taskStatus", "Finished");
@@ -139,6 +150,7 @@ public class FamilyGroupDetails extends AppCompatActivity implements OnItemClick
             if (activity.equals(Activities.All_in_progress_task.getActivityName()))
                 intent.putExtra("taskStatus", "In progress");
             intent.putExtra("familyId",familyId);
+            intent.putExtra("userLogIn",userId);
             startActivity(intent);
         }
     }
