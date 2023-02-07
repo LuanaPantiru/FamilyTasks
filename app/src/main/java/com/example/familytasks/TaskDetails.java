@@ -21,6 +21,7 @@ import com.example.familytasks.repository.GroupRepository;
 import com.example.familytasks.repository.TaskRepository;
 import com.example.familytasks.repository.UserRepository;
 import com.example.familytasks.util.InteractionsBetweenScreens;
+import com.example.familytasks.util.MailApi;
 import com.example.familytasks.util.impl.InteractionBetweenScreensImpl;
 
 import java.util.Arrays;
@@ -158,13 +159,20 @@ public class TaskDetails extends AppCompatActivity {
             {
                 task.setTitle(taskTitle.getText().toString());
                 task.setDescription(taskDescription.getText().toString());
-                task.setIdUser(userRepository.findUserByUsername(taskAssignee.getSelectedItem().toString()).getId());
+                long oldUser=task.getIdUser();
+                User newUser=userRepository.findUserByUsername(taskAssignee.getSelectedItem().toString());
+                if(oldUser!=newUser.getId()){
+                    task.setIdUser(newUser.getId());
+                    MailApi mailApi = new MailApi(TaskDetails.this, newUser.getEmail(), "New Task","A new task has been assigned to you");
+                    mailApi.execute();
+                }
+
 //            Task newTask = new Task(, , task.getPriority(), task.getStatusProp().getStatusName(), 1 , task.getIdFamilyGroup()); //
 
                 taskRepository.updateTask(task);
                 Intent mainScreen = new Intent(TaskDetails.this, FamilyGroupDetails.class);
                 mainScreen.putExtra("familyId",task.getIdFamilyGroup());
-                mainScreen.putExtra("userLogIn",task.getIdUser());
+                mainScreen.putExtra("userLogIn",userId);
                 interactionsBetweenScreens.changeScreen(TaskDetails.this, mainScreen);
             });
 

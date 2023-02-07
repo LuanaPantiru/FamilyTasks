@@ -108,7 +108,7 @@ public class CreateTask extends AppCompatActivity {
 
                     Intent familyDetailsScreen = new Intent(CreateTask.this, FamilyGroupDetails.class);
                     familyDetailsScreen.putExtra("familyId",familyId);
-                    familyDetailsScreen.putExtra("userLogIn",idUser);
+                    familyDetailsScreen.putExtra("userLogIn",userId);
                     interactionsBetweenScreens.changeScreen(CreateTask.this,familyDetailsScreen);
                 }
             }
